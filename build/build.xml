@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="php3" default="test" basedir=".">
+
+    <target name="vars">
+        <resolvepath propertyName="target.dir" path="c:\OpenServer\domains\php3.local" />
+        <echo msg="Source dir: ${project.basedir}" />
+        <echo msg="Target dir: ${target.dir}" />
+    </target>
+
+    <target name="copy">
+        <copy todir="${target.dir}">
+            <fileset dir="${project.basedir}">
+                <include name="**" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="composer">
+        <exec dir="${target.dir}" command="php c:OpenServer\bin\composer.phar install" checkreturn="true" />
+
+    </target>
+
+    <target name="build" depends="vars, copy, composer"></target>
+
+
+</project>
